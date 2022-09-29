@@ -29,8 +29,8 @@
   <mirrors>
     <mirror>
       <id>${CENTRAL_REPO}</id>
-      <name>${CENTRAL_REPO}</name>
-      <url>http://${NEXUSIP}:${NEXUSPORT}/repository/${NEXUS_GRP_REPO}/</url>
+      <name>${CENTRAL-REPO}</name>
+      <url>http://${NEXUSIP}:${NEXUSPORT}/repository/${NEXUS-GRP-REPO}/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
