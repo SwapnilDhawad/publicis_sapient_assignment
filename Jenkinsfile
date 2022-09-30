@@ -25,18 +25,20 @@ pipeline{
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
             }
-        }
-        post{
-            success{
-               echo "Now Archiving."
-               archiveArtifacts artifacts '**/*.war'
+            post {
+                success {
+                    echo "Now archiving."
+                    archiveArtifacts artifacts: '**/*.war'  // archiving in war format
+                }
             }
+           
         }
+        
 
         stage('Test'){
 
             steps {
-                sh 'mvn test'  // Run unit tests
+                sh 'mvn -s settings.xml test'  // Run unit tests
             }
 
         }
@@ -44,7 +46,7 @@ pipeline{
         stage('Checkstyle Analysis'){
 
             steps {
-                sh 'mvn checkstyle:checkstyle'  // Code analysis tool checkstyle to check Vulnerabilities 
+                sh 'mvn -s settings.xml checkstyle:checkstyle'  // Code analysis tool checkstyle to check Vulnerabilities 
             }
 
         }
