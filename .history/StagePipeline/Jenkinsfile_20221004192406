@@ -25,8 +25,8 @@ pipeline{
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
         registryCredential = 'ecr:us-east-1:awscreds' // Jenkins aws creds
-        appRegistry = '829669656648.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg' // actual ECR registry
-        vprofileRegistry= 'https://829669656648.dkr.ecr.us-east-1.amazonaws.com' // URL of ECR
+        appRegistry = '829669656648.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg'
+        vprofileRegistry= 'https://829669656648.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg'
     }   
 
     stages{
@@ -108,25 +108,6 @@ pipeline{
                     type: 'war']
                 ]
              )
-            }
-        }
-
-        stage ('Build App Image'){
-            steps{
-                script{
-                    dockerImage = docker.build.( appRegistry + ":$BUILD_NUMBER", "./Docker-files/app/multistage/")  //Build docker Image
-                }
-            }
-        }
-
-        stage ('Upload App Image'){
-            steps{
-                script{
-                    docker.withRegistry( vprofileRegistry, registryCredential) {
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push('latest') // latest tag 
-                    }
-                }
             }
         }
     }
