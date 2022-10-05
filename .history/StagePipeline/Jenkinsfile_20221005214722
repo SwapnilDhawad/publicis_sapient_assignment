@@ -29,8 +29,6 @@ pipeline{
         vprofileRegistry= 'https://829669656648.dkr.ecr.us-east-1.amazonaws.com' // URL of ECR
         cluster = "vprostaging"
         service = "vproappstagesvc"
-        prod_cluster = "vproprod"
-        prod_service = "vproappprodsvc"
     }   
 
     stages{
@@ -134,36 +132,19 @@ pipeline{
             }
         }
         
-        stage ('Take an Approval for staging deployment'){
+        stage ('Take Approval'){
             steps {
-                echo "Approval Required for Staging Deployment ?"     
+                echo "Taking approval from Manager for QA Deploy"     
                 timeout(time: 7, unit: 'DAYS') {
                    input message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
                 }
             }
         }
-
-        stage ('Deploy to Staging ECS '){
+        
+        stage ('Deploy to ECS staging'){
             steps {
                 withAWS(credentials: 'awscreds', region: 'us-east-1'){
                     sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
-                }
-            }
-        }
-
-        stage ('Take an Approval for Production deployment'){
-            steps {
-                echo "Approval Required for Production Deployment ?"     
-                timeout(time: 7, unit: 'DAYS') {
-                   input message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
-                }
-            }
-        }
-
-        stage ('Deploy to Production ECS '){
-            steps {
-                withAWS(credentials: 'awscreds', region: 'us-east-1'){
-                    sh 'aws ecs update-service --cluster ${prod_cluster} --service ${prod_service} --force-new-deployment'
                 }
             }
         }

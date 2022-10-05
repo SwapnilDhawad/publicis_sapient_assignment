@@ -29,8 +29,6 @@ pipeline{
         vprofileRegistry= 'https://829669656648.dkr.ecr.us-east-1.amazonaws.com' // URL of ECR
         cluster = "vprostaging"
         service = "vproappstagesvc"
-        prod_cluster = "vproprod"
-        prod_service = "vproappprodsvc"
     }   
 
     stages{
@@ -143,7 +141,7 @@ pipeline{
             }
         }
 
-        stage ('Deploy to Staging ECS '){
+        stage ('Deploy to ECS staging'){
             steps {
                 withAWS(credentials: 'awscreds', region: 'us-east-1'){
                     sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
@@ -160,7 +158,7 @@ pipeline{
             }
         }
 
-        stage ('Deploy to Production ECS '){
+        stage ('Deploy to ECS Production'){
             steps {
                 withAWS(credentials: 'awscreds', region: 'us-east-1'){
                     sh 'aws ecs update-service --cluster ${prod_cluster} --service ${prod_service} --force-new-deployment'

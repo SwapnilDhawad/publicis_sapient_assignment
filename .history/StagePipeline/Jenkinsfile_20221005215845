@@ -30,7 +30,7 @@ pipeline{
         cluster = "vprostaging"
         service = "vproappstagesvc"
         prod_cluster = "vproprod"
-        prod_service = "vproappprodsvc"
+        prod_service = 
     }   
 
     stages{
@@ -143,7 +143,7 @@ pipeline{
             }
         }
 
-        stage ('Deploy to Staging ECS '){
+        stage ('Deploy to ECS staging'){
             steps {
                 withAWS(credentials: 'awscreds', region: 'us-east-1'){
                     sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
@@ -160,7 +160,7 @@ pipeline{
             }
         }
 
-        stage ('Deploy to Production ECS '){
+        stage ('Deploy to ECS Production'){
             steps {
                 withAWS(credentials: 'awscreds', region: 'us-east-1'){
                     sh 'aws ecs update-service --cluster ${prod_cluster} --service ${prod_service} --force-new-deployment'
