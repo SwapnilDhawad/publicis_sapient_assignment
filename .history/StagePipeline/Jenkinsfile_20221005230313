@@ -136,7 +136,7 @@ pipeline{
         
         stage ('Take an Approval for Staging deployment'){
             steps {
-                echo "Approval Required for Staging Deployment ??"     
+                echo "Approval Required for Staging Deployment ?"     
                 timeout(time: 7, unit: 'DAYS') {
                    input message: 'Do you approve to deploy into Staging environment?', submitter: 'admin'
                 }
@@ -153,7 +153,7 @@ pipeline{
 
         stage ('Take an Approval for Production deployment'){
             steps {
-                echo "Approval Required for Production Deployment ??"     
+                echo "Approval Required for Production Deployment ?"     
                 timeout(time: 7, unit: 'DAYS') {
                    input message: 'Do you approve to deploy into Production environment?', submitter: 'admin'
                 }
