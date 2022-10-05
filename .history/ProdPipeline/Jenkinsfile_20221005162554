@@ -12,6 +12,10 @@ pipeline{
     }
 
     environment{
+
+        registryCredential = 'ecr:us-east-1:awscreds' // Jenkins aws creds
+        appRegistry = '829669656648.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg' // actual ECR registry
+        vprofileRegistry= 'https://829669656648.dkr.ecr.us-east-1.amazonaws.com' // URL of ECR
         cluster = "vproprod"
         service = "vproappprodsvc"
     }   
