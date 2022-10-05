@@ -155,7 +155,7 @@ pipeline{
             steps {
                 echo "Approval Required for Production Deployment ?"     
                 timeout(time: 7, unit: 'DAYS') {
-                   input message: 'Do you approve to deploy into Production environment?', submitter: 'admin'
+                   input message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
                 }
             }
         }
