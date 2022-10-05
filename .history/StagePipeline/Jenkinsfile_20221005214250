@@ -140,11 +140,10 @@ pipeline{
             }
         }
 
-        stage ('Take Approval'){
+        stage ('Deploy to ECS staging'){
             steps {
-                echo "Taking approval from Manager for QA Deploy"     
-                timeout(time: 7, unit: 'DAYS') {
-                   input message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
+                withAWS(credentials: 'awscreds', region: 'us-east-1'){
+                    sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
                 }
             }
         }

@@ -144,7 +144,7 @@ pipeline{
             steps {
                 echo "Taking approval from Manager for QA Deploy"     
                 timeout(time: 7, unit: 'DAYS') {
-                   input message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
+                nput message: 'Do you approve to deploy into QA environment?', submitter: 'admin'
                 }
             }
         }
