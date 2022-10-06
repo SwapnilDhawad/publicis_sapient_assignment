@@ -15,7 +15,7 @@ EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
 
-
+http://34.230.35.229:8081/repository/weekly-release/QA/vproapp/31-22-10-03_1117/vproapp-31-22-10-03_1117.war
 
 
 
