@@ -13,17 +13,17 @@ pipeline{
 
     environment{
 
-        SNAP_REPO = "release-snapshot"
+        SNAP_REPO = "vprofile-snapshot"
         NEXUS_USER = "admin"
         NEXUS_PASS = "admin"
-        RELEASE_REPO = "weekly-release"
-        CENTRAL_REPO = "maven-central"
-        NEXUSIP = "172.31.23.121"
+        RELEASE_REPO = "vprofile-release"
+        CENTRAL_REPO = "vpro-maven-central"
+        NEXUSIP = "10.182.0.5"
         NEXUSPORT= "8081"
-        NEXUS_GRP_REPO= "project-maven-group"
+        NEXUS_GRP_REPO= "vpro-maven-group"
         NEXUS_LOGIN = "nexuslogin"
-        SONARSERVER = 'sonarserver'
-        SONARSCANNER= 'sonarscanner'
+        //SONARSERVER = 'sonarserver'
+        //SONARSCANNER= 'sonarscanner'
     }   
 
     stages{
