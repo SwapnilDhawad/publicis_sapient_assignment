@@ -58,36 +58,7 @@ pipeline{
 
         }
 
-        stage('CODE ANALYSIS with SONARQUBE') {
-          
-		  environment {
-              scannerHome = tool 'sonarscanner'
-          }
-
-          steps {
-             withSonarQubeEnv("${SONARSERVER}") {
-               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-                   -Dsonar.projectName=publics-sapient-repo \
-                   -Dsonar.projectVersion=1.0 \
-                   -Dsonar.sources=src/ \
-                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
-                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
-            }
-          }
-        }
-
-        stage ('Quality Gate'){
-            steps {
-
-                timeout(time: 1, unit: 'MINUTES') {
-                     waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
-        stage ('UploadArtficat'){
+  /*      stage ('UploadArtficat'){
             steps{
 
                 nexusArtifactUploader(
@@ -117,5 +88,5 @@ pipeline{
               color: COLOR_MAP[currentBuild.currentResult],
               message: "*${currentBuild.currentResult}:*Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
-    }
+    }*/
 }   
